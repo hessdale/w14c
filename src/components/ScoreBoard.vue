@@ -32,7 +32,7 @@ export default {
       cookies.set(`losses`, 0);
     }
     this.$root.$on(`wins`, this.update_wins);
-    this.$root.$on(`wins`, this.update_loss);
+    this.$root.$on(`losses`, this.update_loss);
   },
 };
 </script>

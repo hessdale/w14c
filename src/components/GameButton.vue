@@ -8,12 +8,6 @@
 import axios from "axios";
 import cookies from "vue-cookies";
 export default {
-  data() {
-    return {
-      wins: cookies.get(`wins`),
-      losses: cookies.get(`losses`),
-    };
-  },
   methods: {
     gamble() {
       axios
@@ -23,13 +17,15 @@ export default {
         .then((response) => {
           let number = response.data[0];
           if (number > 50) {
-            let newwin = JSON.parse(this.wins) + 1;
+            let wins = cookies.get(`wins`);
+            let newwin = JSON.parse(wins) + 1;
             cookies.set(`wins`, newwin);
-            this.$root.$emit(`wins`, this.wins);
+            this.$root.$emit(`wins`, newwin);
           } else {
-            let newloss = JSON.parse(this.losses) + 1;
+            let losses = cookies.get(`losses`);
+            let newloss = JSON.parse(losses) + 1;
             cookies.set(`losses`, newloss);
-            this.$root.$emit(`losses`, this.losses);
+            this.$root.$emit(`losses`, newloss);
           }
         })
         .catch((error) => {
